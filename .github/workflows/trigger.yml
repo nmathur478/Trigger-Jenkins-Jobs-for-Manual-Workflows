@@ -15,7 +15,7 @@ jobs:
       - name: Trigger Jobs
         uses: GoldenspearLLC/build-jenkins-job@master
         with:
-          jenkins-url: "65.2.151.202"
+          jenkins-url: "http://65.2.151.202:8080"
           user: "nmathur"
           job-path: "job/${{ matrix.jobs }}"
           jenkins-token: "11bcd5fd5c5ff30e2e9b04a33f860f7251"
