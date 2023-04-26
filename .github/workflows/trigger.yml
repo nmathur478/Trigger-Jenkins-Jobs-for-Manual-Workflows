@@ -5,7 +5,7 @@ on:
     branches:
       - "main"
 
-job:
+jobs:
   trigger-jenkins-job:
     strategy:
       matrix:
