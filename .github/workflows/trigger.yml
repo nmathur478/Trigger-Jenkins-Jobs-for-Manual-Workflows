@@ -9,7 +9,7 @@ jobs:
   trigger-jenkins-job:
     strategy:
       matrix:
-        jobs: ['atcost-cronjob-configmap',atcost-db-restoration-crontab]
+        jobs: ['atcost-cronjob-configmap']
     runs-on: ubuntu-latest
     steps:
       - name: Trigger Jobs
