@@ -1,0 +1,20 @@
+name: Trigger Jenkins Job
+
+on: 
+  push:
+    branches:
+      - "main"
+
+job:
+  trigger-jenkins-job:
+    strategy:
+      matrix:
+        jobs: ['atcost-cronjob-configmap',atcost-db-restoration-crontab]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Jobs
+        uses: GoldenspearLLC/build-jenkins-job@master
+        with:
+          jenkins-url: "65.2.151.202"
+          user: "nmathur"
+          job-path: job/${{ matrix.jobs }}
