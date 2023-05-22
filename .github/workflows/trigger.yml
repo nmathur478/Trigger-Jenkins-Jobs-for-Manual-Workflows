@@ -12,4 +12,6 @@ jobs:
     environment: dev
     steps:
       - name: Trigger Jobs
-        run: echo $TEST
+        run: |
+          echo ${{secrets.TEST}}
+          echo ${{vars.TEST1}}
