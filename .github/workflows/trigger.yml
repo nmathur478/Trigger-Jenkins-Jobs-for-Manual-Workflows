@@ -12,15 +12,12 @@ jobs:
     environment: dev
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
-        with:
-          ref: main
+#         uses: actions/checkout@v3
+#         with:
+#           ref: main
         env:
           TEST: ${{secrets.TEST}}
           TEST1: ${{vars.TEST1}}
-      - name: Trigger Jobs
         run: |
           echo ${{env.TEST1}}          
-          
-  
-          
+             
