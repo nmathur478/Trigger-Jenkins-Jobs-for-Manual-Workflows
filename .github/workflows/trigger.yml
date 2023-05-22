@@ -17,6 +17,6 @@ jobs:
           ref: main
       - name: Trigger Jobs
         run: |
-          ls -al
+          python main.py
   
           
