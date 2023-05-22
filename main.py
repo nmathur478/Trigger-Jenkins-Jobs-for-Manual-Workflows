@@ -1,4 +1,4 @@
 import os
 
-print(os.envron.get("TEST1"))
+print(os.environ.get("TEST1"))
 
