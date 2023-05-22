@@ -13,6 +13,6 @@ jobs:
     steps:
       - name: Trigger Jobs
         run: |
-          python main.py
+          python ./main.py
   
           
