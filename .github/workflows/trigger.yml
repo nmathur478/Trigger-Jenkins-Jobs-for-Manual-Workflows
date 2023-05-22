@@ -10,14 +10,16 @@ jobs:
   trigger-jenkins-job:
     runs-on: ubuntu-latest
     environment: dev
+    env:
+      TEST: ${{secrets.TEST}}
+      TEST1: ${{vars.TEST1}}
     steps:
       - name: Checkout
-#         uses: actions/checkout@v3
-#         with:
-#           ref: main
-        env:
-          TEST: ${{secrets.TEST}}
-          TEST1: ${{vars.TEST1}}
+        uses: actions/checkout@v3
+        with:
+          ref: main
+          
+      - name: jfhzd
         run: |
-          echo ${{env.TEST1}}          
-             
+          python main.py
+          
