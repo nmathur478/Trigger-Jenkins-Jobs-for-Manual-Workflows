@@ -13,5 +13,6 @@ jobs:
     steps:
       - name: Trigger Jobs
         run: |
-          echo ${{secrets.TEST}}
-          echo ${{vars.TEST1}}
+          python main.py
+  
+          
