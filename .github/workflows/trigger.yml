@@ -22,6 +22,6 @@ jobs:
       - name: Print env
         run: |
           ls -al
-          cat .env
+          echo $TEST1
       
           
