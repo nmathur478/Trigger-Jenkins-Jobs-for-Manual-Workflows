@@ -21,9 +21,10 @@ jobs:
         id: set_cluster_environment
         uses: actions/github-script@v7
         env:
-          version: ${{ inputs.version }}
+          version: ${{ github.event.inputs.version }}
         with:
           script: |
+            version =  ${{env.version}}
             console.log(version)
             //console.log(${version})
             
