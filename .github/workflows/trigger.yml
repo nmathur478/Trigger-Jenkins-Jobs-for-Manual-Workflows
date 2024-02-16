@@ -19,10 +19,12 @@ jobs:
           fetch-depth: 0
       - name: Identifying cluster in which application should be deployed
         id: set_cluster_environment
-        uses: actions/github-script@v6
+        uses: actions/github-script@v7
         env:
-          version: '${{inputs.version}}'
+          version: ${{ inputs.version }}
         with:
           script: |
-            console.log(version)
+            //console.log(version)
+            console.log(${version})
+            
 
