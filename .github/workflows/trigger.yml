@@ -22,5 +22,6 @@ jobs:
         uses: actions/github-script@v6
         with:
           script: |
-              const version = inputs.version 
+              const core = require('@actions/core')
+              const version = core.getInput('version')
               console.log(version)
