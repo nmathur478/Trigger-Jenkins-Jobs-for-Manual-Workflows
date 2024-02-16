@@ -24,7 +24,7 @@ jobs:
           version: ${{ inputs.version }}
         with:
           script: |
-            //console.log(version)
-            console.log(${version})
+            console.log(version)
+            //console.log(${version})
             
 
