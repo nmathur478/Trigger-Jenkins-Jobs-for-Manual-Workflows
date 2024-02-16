@@ -22,5 +22,5 @@ jobs:
         uses: actions/github-script@v6
         with:
           script: |
-              const version = ${{ inputs.version }}
+              const version = inputs.version 
               console.log(version)
