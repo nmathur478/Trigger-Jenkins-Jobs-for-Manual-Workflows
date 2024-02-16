@@ -1,27 +1,26 @@
-####
 name: Trigger Jenkins Job
 
 on: 
-  push:
-    branches:
-      - "main"
+  workflow_dispatch:
+      inputs:
+        version:
+          description: Application version
+          required: true
+          type: string
 
 jobs:
-  trigger-jenkins-job:
+  check:
     runs-on: ubuntu-latest
     
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
-          ref: main
-      - name: Create Env
-        uses: oNaiPs/secrets-to-env-action@v1
+          fetch-depth: 0
+      - name: Identifying cluster in which application should be deployed
+        id: set_cluster_environment
+        uses: actions/github-script@v6
         with:
-          secrets: ${{ toJSON(secrets) }}
-      - name: Print env
-        run: |
-          ls -al
-          echo $TEST1
-      
-          
+          script: |
+              const version = ${{ inputs.version }}
+              console.log(version)
