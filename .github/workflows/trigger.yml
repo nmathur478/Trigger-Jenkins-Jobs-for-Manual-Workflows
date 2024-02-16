@@ -20,7 +20,9 @@ jobs:
       - name: Identifying cluster in which application should be deployed
         id: set_cluster_environment
         uses: actions/github-script@v6
+        env:
+          version: '${{inputs.version}}'
         with:
           script: |
+            console.log(version)
 
-              console.log(version)
