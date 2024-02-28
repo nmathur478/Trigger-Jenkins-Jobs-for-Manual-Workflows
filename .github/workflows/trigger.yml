@@ -8,6 +8,8 @@ on:
 jobs:
   fetch-console-output:
     runs-on: ubuntu-latest
+    env:
+      JENKINS_URL: ${{ secrets.JENKINS_URL }}
 
     steps:
     - name: Checkout repository (clone the repo for use)
@@ -18,8 +20,9 @@ jobs:
     - name: Fetch Jenkins Console Output
       run: |
         # Replace the following values with your Jenkins information
-        JENKINS_URL=${{secrets.JENKINS_URL}}
+        
         echo $JENKINS_URL
+        echo ${JENKINS_URL}
         
         # JOB_NAME=your-job-name
         # BUILD_NUMBER=your-build-number
