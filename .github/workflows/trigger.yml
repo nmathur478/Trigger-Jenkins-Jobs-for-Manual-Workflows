@@ -17,10 +17,13 @@ jobs:
       with:
         fetch-depth: 0
 
+    - name: Setting envs
+      run: |
+        echo "JENKINS_URL=${{ secrets.JENKINS_URL }}" >> $GITHUB_ENV
     - name: Fetch Jenkins Console Output
       run: |
         # Replace the following values with your Jenkins information
-        
+        source $GITHUB_ENV
         echo $JENKINS_URL
         echo ${JENKINS_URL}
         
