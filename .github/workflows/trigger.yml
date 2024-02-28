@@ -1,37 +1,40 @@
-name: Trigger Jenkins Job
+name: Fetch Jenkins Build Console Output
 
-on: 
-  workflow_dispatch:
-      inputs:
-        version:
-          description: Application version
-          required: true
-          type: string
+on:
+  push:
+    branches:
+      - main
 
 jobs:
-  check:
+  fetch-console-output:
     runs-on: ubuntu-latest
-    
+
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      - name: Identifying cluster in which application should be deployed
-        id: set_cluster_environment
-        run: |
-                echo ${{inputs.version}}
-                if [[ ${{inputs.version}} =~ ^v[0-9]+\.[0-9]+\.[0-9]+-rc[0-9]+$ ]]; then
-                    cluster_environment="testing"
-                
-                elif [[ ${{inputs.version}} =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
-                    cluster_environment="production"
+    - name: Set up Git
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+        fetch-depth: 0
 
-                else
-                    cluster_environment="dev"
-                fi
+    - name: Clone repository
+      run: |
+        git fetch --prune --unshallow
+        git checkout ${{ github.sha }}
 
-                echo "Cluster Environment: $cluster_environment"
-                echo "::set-output name=cluster_environment::$cluster_environment"
-            
+    - name: Fetch Jenkins Console Output
+      run: |
+        # Replace the following values with your Jenkins information
+        JENKINS_URL=${{secrets.JENKINS_URL}}
+        echo $JENKINS_URL
+        
+        # JOB_NAME=your-job-name
+        # BUILD_NUMBER=your-build-number
+        # JENKINS_USER=your-jenkins-username
+        # JENKINS_TOKEN=your-jenkins-token
+
+        # Fetch console output using Jenkins REST API
+        #CONSOLE_OUTPUT=$(curl -s "${JENKINS_URL}/job/${JOB_NAME}/${BUILD_NUMBER}/consoleText" --user "${JENKINS_USER}:${JENKINS_TOKEN}")
+
+        # Print console output
+        #echo "${CONSOLE_OUTPUT}"
 
