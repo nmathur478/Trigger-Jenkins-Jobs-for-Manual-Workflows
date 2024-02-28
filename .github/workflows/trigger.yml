@@ -10,16 +10,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Set up Git
-      uses: actions/setup-python@v2
+    - name: Checkout repository (clone the repo for use)
+      uses: actions/checkout@v4
       with:
-        python-version: '3.x'
         fetch-depth: 0
-
-    - name: Clone repository
-      run: |
-        git fetch --prune --unshallow
-        git checkout ${{ github.sha }}
 
     - name: Fetch Jenkins Console Output
       run: |
