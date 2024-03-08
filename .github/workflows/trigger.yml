@@ -1,9 +1,26 @@
 name: Sending Mail
 
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:
+    inputs:
+        version:
+          description: Application version
+          required: true
+          type: string
+        release_name:
+          description: Release Name
+          required: true
+          type: string
+        
+        codeowners:
+          description: CodeOwner's Email ID
+          required: true
+          type: string
+        cluster_environment:
+          description: Cluster Environment
+          required: true
+          type: string
+        
 
 jobs:
   send-mail:
@@ -17,8 +34,8 @@ jobs:
           server_port: 587
           username: noreply@itrnetwork.com
           password: ${{ secrets.SMTP_PASSWORD }}
-          subject: Deployment Notification of atcost-opencart:1.2.3 - test
-          to: atiwari@calance.com
+          subject: Deployment Notification of ${{inputs.release_name}}:${{inputs.version}} - test
+          to: ${{inputs.codeowners}}
           from: DevOps Team
           cc: nkashyap@calance.com, nmathur@calance.com
           body: |
@@ -28,9 +45,9 @@ jobs:
 
             Deployment Details:
 
-              Application: atcost-opencart
-              Version: 1.2.3
-              Environment: testing
+              Application: ${{inputs.release_name}}
+              Version: ${{inputs.version}}
+              Environment: ${{inputs.cluster_environment}}
             
             Best Regards,
             DevOps Team 
