@@ -1,4 +1,4 @@
-name: Fetch Jenkins Build Console Output
+name: Sending Mail
 
 on:
   push:
@@ -6,25 +6,32 @@ on:
       - main
 
 jobs:
-  fetch-console-output:
+  send-mail:
     runs-on: ubuntu-latest
-    env:
-      JENKINS_URL: ${{ secrets.JENKINS_URL }}
 
     steps:
-    - name: Checkout repository (clone the repo for use)
-      uses: actions/checkout@v4
+    - name: Notify about beginning of deployment
+      uses: dawidd6/action-send-mail@v3
       with:
-        fetch-depth: 0
+          server_address: smtp.office365.com
+          server_port: 587
+          username: noreply@itrnetwork.com
+          password: ${{ secrets.SMTP_PASSWORD }}
+          subject: Deployment Notification of atcost-opencart:1.2.3 - test
+          to: atiwari@calance.com
+          from: DevOps Team
+          cc: nkashyap@calance.com, nmathur@calance.com
+          body: |
+            Dear CodeOwner/s,
+            
+            We are pleased to inform you that a deployment process for ${{ inputs.release_name }} is about to commence.
 
-    - name: Fetching console output
-      run: python main.py
-    
-        
+            Deployment Details:
 
-        # Fetch console output using Jenkins REST API
-        #CONSOLE_OUTPUT=$(curl -s "${JENKINS_URL}/job/${JOB_NAME}/${BUILD_NUMBER}/consoleText" --user "${JENKINS_USER}:${JENKINS_TOKEN}")
-
-        # Print console output
-        #echo "${CONSOLE_OUTPUT}"
-
+              Application: atcost-opencart
+              Version: 1.2.3
+              Environment: testing
+            
+            Best Regards,
+            DevOps Team 
+            
