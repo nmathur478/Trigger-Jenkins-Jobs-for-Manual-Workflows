@@ -11,7 +11,7 @@ jobs:
 
     steps:
     - name: Failing step
-      continue-on-error: true
+      #continue-on-error: true
       id: fail
       run: python3 s.py
       
