@@ -11,10 +11,10 @@ jobs:
 
     steps:
     - name: Failing step
-      #continue-on-error: true
+      continue-on-error: false
       id: fail
       run: python3 s.py
       
     - name: Running after failed step
-      if: steps.fail.outcome == 'failure'
+      if: failure()
       run: echo "This step is executed because previous step failed"
